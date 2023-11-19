@@ -1,10 +1,11 @@
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
  * This class will be deleted later.
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         // You can test your PredictionService here
         PredictionService predictionService = new PredictionService();
