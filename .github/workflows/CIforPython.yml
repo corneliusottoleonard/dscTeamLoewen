@@ -31,3 +31,24 @@ jobs:
     - name: Test with pytest
       run: |
         echo "testing"
+    - name: Create distribution packages
+      run: |
+    - name: Create distribution packages
+      run: |
+       python -m pip install --upgrade pip
+       pip install setuptools wheel
+       python setup.py sdist bdist_wheel
+
+    # Save binaries as an artifact
+    - name: Save dist artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist-artifacts
+        path: dist
+
+    # Save the PNG file as an artifact (for testing)
+    - name: Save PNG artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: png-artifacts
+        path: test_plot.png
