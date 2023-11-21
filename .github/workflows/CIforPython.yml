@@ -39,13 +39,16 @@ jobs:
        pip install setuptools wheel
        python setup.py sdist bdist_wheel
 
-    - name: Create GitHub Release
-      uses: softprops/action-gh-release@v1
+    # Save binaries as an artifact
+    - name: Save dist artifact
+      uses: actions/upload-artifact@v2
       with:
-        files: dist/*  
-        tag_name: ${{ github.sha }}
-        title: Release ${{ github.sha }}
-        body: |
-          Changes in this release:
-          - first test
-        draft: false
+        name: dist-artifacts
+        path: dist
+
+    # Save the PNG file as an artifact (for testing)
+    - name: Save PNG artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: png-artifacts
+        path: test_plot.png
