@@ -1,0 +1,2 @@
+class EDMD:
+    pass
