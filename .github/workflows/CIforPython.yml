@@ -33,7 +33,11 @@ jobs:
         echo "testing"
     - name: Create distribution packages
       run: |
-        python setup.py sdist bdist_wheel
+    - name: Create distribution packages
+      run: |
+       python -m pip install --upgrade pip
+       pip install setuptools wheel
+       python setup.py sdist bdist_wheel
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
