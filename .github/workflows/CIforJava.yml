@@ -37,6 +37,6 @@ jobs:
         name: java-artifacts
         path: '*.class'
 
-    - name: Save JAR artifact if applicable
-      if: success() && exists('ExampleJavaApp.class')
+    - name: Save JAR artifact
+      if: success()
       run: jar cfe ExampleJavaApp.jar ExampleJavaApp *.class
