@@ -22,10 +22,21 @@ jobs:
       run: |
         javac ExampleJavaApp.java
         java ExampleJavaApp
-
+    - name: Test
+      run: |
+        echo "testing"
     # Save the generated 'output.png' file as an artifact
     - name: Save PNG artifact
       uses: actions/upload-artifact@v2
       with:
         name: png-artifacts
         path: output.png
+    - name: Save Java artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: java-artifacts
+        path: '*.class'
+
+    - name: Save JAR artifact if applicable
+      if: success() && exists('ExampleJavaApp.class')
+      run: jar cfe ExampleJavaApp.jar ExampleJavaApp *.class
