@@ -19,7 +19,7 @@ def main():
     # Plot the results
     plt.scatter(embedding[:, 0], embedding[:, 1])
     plt.title('Diffusion Map Embedding')
-    plt.show()
+    plt.savefig('test_plot.png')
 
     # Your main script logic here
     print("Datafold Imported and Diffusion Map Computed")
