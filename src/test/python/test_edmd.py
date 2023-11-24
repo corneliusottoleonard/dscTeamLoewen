@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 
-from src.models.edmd import EDMDModel
+from src.python.edmd import EDMDModel
 
 
 def load_data_pot_fields(

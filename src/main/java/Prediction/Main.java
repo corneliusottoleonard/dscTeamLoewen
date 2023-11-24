@@ -1,3 +1,7 @@
+package Prediction;
+
+import Prediction.PredictionService;
+
 import java.io.IOException;
 import java.util.Arrays;
 

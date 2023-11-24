@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 
-from src.models.dmd import DMDModel
+from src.python.dmd import DMDModel
 
 
 def load_data_pot_fields(
