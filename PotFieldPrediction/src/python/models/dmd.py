@@ -4,11 +4,9 @@ import numpy as np
 from datafold import (
     EDMD,
     DMDStandard,
-    TSCFeaturePreprocess,
+    TSCIdentity,
 )
-from sklearn.preprocessing import (
-    Normalizer,
-)
+
 from datafold.pcfold import (
     TSCDataFrame,
 )
@@ -18,15 +16,24 @@ import datafold.dynfold as dfold
 import datafold.pcfold as pfold
 
 
-class EDMDModel:
-    @staticmethod
-    def pca(data: pd.DataFrame, n_components: int = 10) -> pd.DataFrame:
-        pca = PCA(n_components=n_components, svd_solver="arpack")
-        return pca.fit_transform(data)
+class DMDModel:
 
     @staticmethod
-    def create_defussion_maps(data: pd.DataFrame):
-        # Von Gruppe wednesday
+    def create_defussion_maps(data: pd.DataFrame) -> dfold.DiffusionMaps:
+        '''
+            this function reduce dimensionality of Features
+                
+            Input: 
+                data: Pandas.DataFrame
+                n_components: int -> reduce faktor
+                
+            Output: 
+                dfold.DiffusionMaps
+                
+
+        Von idae Gruppe wednesday
+        '''
+        # 
         pcm = pfold.PCManifold(data)
         pcm.optimize_parameters(
             n_subsample=int(np.round(data.shape[1]) * 0.50),
@@ -43,13 +50,24 @@ class EDMDModel:
 
     @staticmethod
     def fit(data: pd.DataFrame, n_components: int = 10) -> EDMD:
+        '''
+            this function fitting Dmd Model and reshape Data
+                
+            Input: 
+                data: Pandas.DataFrame
+                n_components: int = Default(10)-> feature reduce faktor
+                
+            Output: 
+                EDMD -> DMD Model
+                
+        '''
         model = EDMD(
             dict_steps=[
                 (
                     "_id",
-                    TSCFeaturePreprocess(Normalizer()),
+                    TSCIdentity(),
                 ),
-                ("Diffusion Map", EDMDModel.create_defussion_maps(data)),
+                ("Diffusion Map", DMDModel.create_defussion_maps(data)),
             ],
             dmd_model=DMDStandard(),
             include_id_state=False,
@@ -72,6 +90,18 @@ class EDMDModel:
 
     @staticmethod
     def predict(model: EDMD, data: TSCDataFrame, time_value: int = 30) -> np.array:
+        '''
+            this function predicting Dmd Model and reshape Data
+                
+            Input:
+                model: EDMD
+                data: TSCDataFrame
+                Time_value: int = Default(30) -> amount of predictions made
+                
+            Output: 
+                np.array
+                
+        '''
         predict_data = TSCDataFrame.from_tensor(
             np.float32(
                 np.reshape(
@@ -89,5 +119,18 @@ class EDMDModel:
     def fit_and_predict(
         data: pd.DataFrame, n_components: int = 10, time_value: int = 30
     ) -> np.array:
-        fitted_dmd_model = EDMDModel.fit(data, n_components)
-        return EDMDModel.predict(fitted_dmd_model, data, time_value)
+        '''
+            this function combine fit and predict
+                
+            Input:
+                model: EDMD
+                data: pd.DataFrame
+                n_components: int = Default(10)-> feature reduce faktor
+                itme_value: int = Default(30) -> amount of predictions made
+                
+            Output: 
+                np.array
+                
+        '''
+        fitted_dmd_model = DMDModel.fit(data, n_components)
+        return DMDModel.predict(fitted_dmd_model, data, time_value)
