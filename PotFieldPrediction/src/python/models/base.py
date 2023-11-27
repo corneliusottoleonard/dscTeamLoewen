@@ -1,6 +1,4 @@
-# created by Sebastian Schmid
 import pandas as pd
-
 import numpy as np
 
 
@@ -17,52 +15,46 @@ from datafold.pcfold import (
 import datafold.dynfold as dfold
 import datafold.pcfold as pfold
 
-from PotFieldPrediction.src.python.models.base import BaseModel
-class DMDModel(BaseModel):
+
+class BaseModel:
     @staticmethod
-    def fit(data: pd.DataFrame, n_components: int = 10) -> EDMD:
+    def create_defussion_maps(data: pd.DataFrame) -> dfold.DiffusionMaps:
         """
-        this function fitting Dmd Model and reshape Data
+        this function reduce dimensionality of Features
 
         Args:
             data:
                 Pandas.DataFrame
             n_components:
-                int = Default(10)-> feature reduce faktor
+                int -> reduce faktor
 
         Returns:
-            DMD Model
+            dfold.DiffusionMaps
 
         Raises:
-            Exception:
-                Split data in train and test first
-        """
-        model = EDMD(
-            dict_steps=[
-                (
-                    "_id",
-                    TSCIdentity(),
-                ),
-                ("Diffusion Map", DMDModel.create_defussion_maps(data)),
-            ],
-            dmd_model=DMDStandard(),
-            include_id_state=False,
-            sort_koopman_triplets=True,
-            verbose=True,
-        )
+            None
 
-        train = TSCDataFrame.from_tensor(
-            np.float32(
-                np.reshape(
-                    data,
-                    (1, data.shape[0], -1),
-                )
-            )
+        Von idae Gruppe wednesday
+        """
+        #
+        pcm = pfold.PCManifold(data)
+        pcm.optimize_parameters(
+            n_subsample=int(np.round(data.shape[1]) * 0.50),
+            k=int(np.round(data.shape[1] * 0.50)),
         )
-        try:
-            return model.fit(train)
-        except:
-            raise Exception("Split data in train and test first")
+        parameterized_kernel = pfold.GaussianKernel(
+            epsilon=pcm.kernel.epsilon, distance=dict(cut_off=pcm.cut_off)
+        )
+        dmap = dfold.DiffusionMaps(
+            kernel=parameterized_kernel,
+            n_eigenpairs=2,
+        )
+        return dmap
+
+    @staticmethod
+    def fit(data: pd.DataFrame, n_components: int = 10) -> EDMD:
+        pass
+
     @staticmethod
     def predict(model: EDMD, data: TSCDataFrame, time_value: int = 30) -> np.array:
         """
