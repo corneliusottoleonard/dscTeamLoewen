@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9bfe77da-34c1-407d-93ee-be9ff59853e8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/java/mock/Coordinate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/java/mock/Coordinate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/java/mock/CoordinateI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/java/mock/CoordinateI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/java/mock/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/java/mock/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/java/mock/FieldI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/java/mock/FieldI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,15 +33,23 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "23-add-ipc-to-java-script",
-    "last_opened_file_path": "/home/gregor/Studium/7.Semester/Projektstudium/github/neuer_clone2/dscTeamLoewen",
+    "git-widget-placeholder": "add-Mock-to-Repo2",
+    "last_opened_file_path": "/home/gregor/Studium/7.Semester/Projektstudium/github/neuer_clone2/dscTeamLoewen/PotFieldPrediction/src/java/main/java/mock",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/java/main/java/mock" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -57,7 +64,7 @@
       <workItem from="1701179081825" duration="65000" />
       <workItem from="1701179203384" duration="225000" />
       <workItem from="1701179444714" duration="70000" />
-      <workItem from="1701179525752" duration="317000" />
+      <workItem from="1701179525752" duration="1023000" />
     </task>
     <servers />
   </component>

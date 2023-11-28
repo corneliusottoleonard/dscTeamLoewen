@@ -1,4 +1,4 @@
-package Mock;
+package mock;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;

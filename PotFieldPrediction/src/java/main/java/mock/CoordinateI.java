@@ -1,4 +1,4 @@
-package Mock;
+package mock;
 
 public interface CoordinateI {
     // Object which stores one Coordinate with

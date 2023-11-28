@@ -1,4 +1,4 @@
-package Mock;
+package mock;
 
 import java.util.Objects;
 
