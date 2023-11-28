@@ -1,10 +1,8 @@
 name: Python application
 
 on:
-  push:
-    branches: [ "CIforPython" ]  # Adjust this to match your branch name
   pull_request:
-    branches: [ "CIforPython" ]  # Adjust this to match your branch name
+    branches: [ "main" ]  # Adjust this to match your branch name
 
 permissions:
   contents: read
