@@ -1,10 +1,8 @@
 name: Java application
 
 on:
-  push:
-    branches: [ "CIforJava" ]
   pull_request:
-    branches: [ "CIforJava" ]
+    branches: [ "main" ]
 
 jobs:
   build:
