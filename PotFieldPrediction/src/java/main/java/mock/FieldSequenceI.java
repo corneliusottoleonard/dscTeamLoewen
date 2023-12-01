@@ -6,6 +6,6 @@ public interface FieldSequenceI {
     // Object which stores a List of
     // CoordinateI objects
     public List<FieldI> getFields();
-    public void setFields(String filePath);
+    public void addField(String filePath);
 
 }
