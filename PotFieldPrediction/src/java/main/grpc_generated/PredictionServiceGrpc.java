@@ -1,4 +1,4 @@
-import grpc_generated.Grpc;
+package grpc_generated;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;

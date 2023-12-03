@@ -11,6 +11,7 @@ public class grpcClientTest {
                 .usePlaintext() // This is just for the sake of simplicity. In production, you should use encryption.
                 .build();
 
+
         // Shutdown the channel
         channel.shutdown();
     }

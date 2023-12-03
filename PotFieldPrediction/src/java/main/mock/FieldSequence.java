@@ -3,7 +3,7 @@ package mock;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FieldSequence implements FieldSequenceI{
+public class FieldSequence implements FieldSequenceI {
 
     public List<FieldI> fields = new ArrayList<FieldI>();
 

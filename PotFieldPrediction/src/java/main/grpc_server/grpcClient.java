@@ -1,6 +1,8 @@
 package grpc_server;
-import io.grpc.stub.StreamObserver;
+
+import grpc_generated.PredictionServiceGrpc;
 
 public class grpcClient extends PredictionServiceGrpc.PredictionServiceImplBase {
-    //TO-DO
+
 }
+

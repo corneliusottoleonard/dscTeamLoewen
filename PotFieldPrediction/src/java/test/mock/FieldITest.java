@@ -4,6 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.main.java.mock.Coordinate;
+import java.main.java.mock.CoordinateI;
+import java.main.java.mock.Field;
+import java.main.java.mock.FieldI;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;

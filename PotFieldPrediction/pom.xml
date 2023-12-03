@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.example</groupId>
+    <groupId>teamLoewen</groupId>
     <artifactId>PotFieldPrediction</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>PotFieldPrediction</name>
@@ -74,18 +74,18 @@
                             <includeMavenTypes>direct</includeMavenTypes>
 
                             <inputDirectories>
-                                <include>src/java/main/proto</include>
+                                <include>src/proto</include>
                             </inputDirectories>
 
                             <outputTargets>
                                 <outputTarget>
                                     <type>java</type>
-                                    <outputDirectory>src/java/main/java/grpc_generated</outputDirectory>
+                                    <outputDirectory>src/java/main/grpc_generated</outputDirectory>
                                 </outputTarget>
                                 <outputTarget>
                                     <type>grpc_generated-java</type>
                                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.15.0</pluginArtifact>
-                                    <outputDirectory>src/java/main/java/grpc_generated</outputDirectory>
+                                    <outputDirectory>src/java/main/grpc_generated</outputDirectory>
                                 </outputTarget>
                             </outputTargets>
                         </configuration>
