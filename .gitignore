@@ -1,3 +1,5 @@
 venv
+venvnb
+**.gif
 potFields
 **/__pycache__/
