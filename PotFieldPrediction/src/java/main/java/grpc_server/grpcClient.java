@@ -1,7 +1,5 @@
 package grpc_example;
-
-import grpc.GreeterGrpc;
-import grpc.Grpc;
+import Grpc;
 import io.grpc.stub.StreamObserver;
 
 public class grpcClient extends GreeterGrpc.GreeterImplBase {

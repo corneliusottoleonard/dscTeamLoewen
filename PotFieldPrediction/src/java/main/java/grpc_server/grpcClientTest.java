@@ -1,7 +1,5 @@
-package grpc_example;
+/*package grpc_example;
 
-import grpc.GreeterGrpc;
-import grpc.Grpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -29,3 +27,5 @@ public class grpcClientTest {
         channel.shutdown();
     }
 }
+
+ */
