@@ -1,3 +1,5 @@
 venv
 potFields
+target
+PotFieldPrediction/.idea/
 **/__pycache__/
