@@ -1,19 +1,36 @@
 syntax = "proto3";
 
-option java_package = "grpc";
-
-// The greeting service definition.
-service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
+message Coordinate {
+  int32 x = 1;
+  int32 y = 2;
+  double z = 3;
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
+message Field {
+  repeated Coordinate coordinates = 1;
 }
 
-// The response message containing the greetings
-message HelloReply {
-  string message = 1;
+message FieldSequence {
+  repeated Field fields = 1;
+}
+
+message FitRequest {
+  FieldSequence fitData = 1;
+}
+
+message FitResponse {
+}
+
+message PredictRequest {
+  FieldSequence field = 1;
+  int32 steps = 2;
+}
+
+message PredictionResponse {
+  FieldSequence predictedData = 1;
+}
+
+service PredictionService {
+  rpc fit (FieldSequence) returns (FitResponse);
+  rpc predict (PredictRequest) returns (PredictionResponse);
 }

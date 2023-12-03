@@ -1,13 +1,6 @@
-package grpc_example;
-import Grpc;
+package grpc_server;
 import io.grpc.stub.StreamObserver;
 
-public class grpcClient extends GreeterGrpc.GreeterImplBase {
-
-    @Override
-    public void sayHello(Grpc.HelloRequest request, StreamObserver<Grpc.HelloReply> responseObserver) {
-        Grpc.HelloReply reply = Grpc.HelloReply.newBuilder().setMessage("Hello " + request.getName()).build();
-        responseObserver.onNext(reply);
-        responseObserver.onCompleted();
-    }
+public class grpcClient extends PredictionServiceGrpc.PredictionServiceImplBase {
+    //TO-DO
 }
