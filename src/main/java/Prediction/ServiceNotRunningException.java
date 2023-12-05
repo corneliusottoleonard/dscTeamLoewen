@@ -1,3 +1,5 @@
+package Prediction;
+
 /**
  * Exception raised if the prediction service could not be started.
  */

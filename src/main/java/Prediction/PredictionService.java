@@ -1,3 +1,5 @@
+package Prediction;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -8,7 +10,7 @@ public class PredictionService implements AutoCloseable {
 
     private Process process;
     private ProcessHandle processHandle;
-    private final String[] PROCESS_COMMAND = {"python3", "./python/run.py"}; // TODO: replace by actual script
+    private final String[] PROCESS_COMMAND = {"python3", "src/python/run.py"}; // TODO: replace by actual script
     private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
 
