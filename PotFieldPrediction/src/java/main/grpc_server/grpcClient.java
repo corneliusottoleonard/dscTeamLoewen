@@ -13,9 +13,9 @@ public class grpcClient {
 
     public static void main(String[] args) {
         // Create a channel to connect to the server
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090)
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
                 .usePlaintext()
-                .maxInboundMessageSize(25 * 1024 * 1024)// This is just for the sake of simplicity. In production, you should use encryption.
+                .maxInboundMessageSize(100 * 1024 * 1024)// This is just for the sake of simplicity. In production, you should use encryption.
                 .build();
 
         // Example of using the generated gRPC client (assuming a running gRPC server)
@@ -65,6 +65,7 @@ public class grpcClient {
 
 
         // Call to predict RPC
+        Grpc.FitResponse fitResponse = blockingStub.fit(fitRequest);
         Grpc.PredictionResponse predictionResponse = blockingStub.predict(predictRequest);
         System.out.println("Prediction response: " + predictionResponse);
 

@@ -33,7 +33,9 @@ class PotFieldPredictionService(PotField_pb2_grpc.PredictionServiceServicer):
         super().__init__()
 
     def fit(self, request, context):
+        print("Start data conversion")
         data = convert_fieldsequence_to_dataframe(request.fitData.fields)
+        print("Start data conversion")
         model = edmd.EDMDModel.fit(data)
         self.model = model
         return
@@ -45,7 +47,10 @@ class PotFieldPredictionService(PotField_pb2_grpc.PredictionServiceServicer):
         return convert_dataframe_to_fieldsequence(prediction)
 
 def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10), options = [
+        ('grpc.max_send_message_length', 100*1024*1024),
+        ('grpc.max_receive_message_length', 100*1024*1024)
+    ])
     PotField_pb2_grpc.add_PredictionServiceServicer_to_server(PotFieldPredictionService(), server)
 
     # necessary to use gRPC web UI
