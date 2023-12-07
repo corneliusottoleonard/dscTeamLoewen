@@ -14,7 +14,7 @@ def convert_fieldsequence_to_dataframe(data: 'PotField_pb2.FieldSequence') -> TS
     # TODO:  inefficient af, fix it
     return TSCDataFrame.from_frame_list((
         pd.DataFrame.from_records((
-            {'x': coord.x, 'y': coord.y, 'z': coord.z} for coord in field.coordinates
+            {'x': coord.x, 'y': coord.y, 'value': coord.value} for coord in field.coordinates
         )) for field in data
     ))
 
@@ -22,7 +22,7 @@ def convert_dataframe_to_fieldsequence(data: TSCDataFrame) -> PotField_pb2.Field
     # TODO:  inefficient af, fix it
     return PotField_pb2.FieldSequence(fields=(
         PotField_pb2.Field(coordinates=(
-            PotField_pb2.Coordinate(x=coord['x'], y=coord['y'], z=coord['z'])
+            PotField_pb2.Coordinate(x=coord['x'], y=coord['y'], value=coord['value'])
                 for _, coord in f.iterrows()
         )) for _, f in data.itertimeseries()
     ))

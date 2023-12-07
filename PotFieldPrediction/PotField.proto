@@ -3,7 +3,7 @@ syntax = "proto3";
 message Coordinate {
     int32 x = 1;
     int32 y = 2;
-    double z = 3;
+    double value = 3;
 }
 
 message Field {
