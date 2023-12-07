@@ -28,9 +28,9 @@ public final class Grpc {
     int getY();
 
     /**
-     * <code>double z = 3;</code>
+     * <code>double value = 3;</code>
      */
-    double getZ();
+    double getValue();
   }
   /**
    * Protobuf type {@code Coordinate}
@@ -47,7 +47,7 @@ public final class Grpc {
     private Coordinate() {
       x_ = 0;
       y_ = 0;
-      z_ = 0D;
+      value_ = 0D;
     }
 
     @java.lang.Override
@@ -86,7 +86,7 @@ public final class Grpc {
             }
             case 25: {
 
-              z_ = input.readDouble();
+              value_ = input.readDouble();
               break;
             }
             default: {
@@ -139,13 +139,13 @@ public final class Grpc {
       return y_;
     }
 
-    public static final int Z_FIELD_NUMBER = 3;
-    private double z_;
+    public static final int VALUE_FIELD_NUMBER = 3;
+    private double value_;
     /**
-     * <code>double z = 3;</code>
+     * <code>double value = 3;</code>
      */
-    public double getZ() {
-      return z_;
+    public double getValue() {
+      return value_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -168,8 +168,8 @@ public final class Grpc {
       if (y_ != 0) {
         output.writeInt32(2, y_);
       }
-      if (z_ != 0D) {
-        output.writeDouble(3, z_);
+      if (value_ != 0D) {
+        output.writeDouble(3, value_);
       }
       unknownFields.writeTo(output);
     }
@@ -188,9 +188,9 @@ public final class Grpc {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, y_);
       }
-      if (z_ != 0D) {
+      if (value_ != 0D) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, z_);
+          .computeDoubleSize(3, value_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -213,9 +213,9 @@ public final class Grpc {
       result = result && (getY()
           == other.getY());
       result = result && (
-          java.lang.Double.doubleToLongBits(getZ())
+          java.lang.Double.doubleToLongBits(getValue())
           == java.lang.Double.doubleToLongBits(
-              other.getZ()));
+              other.getValue()));
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -231,9 +231,9 @@ public final class Grpc {
       hash = (53 * hash) + getX();
       hash = (37 * hash) + Y_FIELD_NUMBER;
       hash = (53 * hash) + getY();
-      hash = (37 * hash) + Z_FIELD_NUMBER;
+      hash = (37 * hash) + VALUE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getZ()));
+          java.lang.Double.doubleToLongBits(getValue()));
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -371,7 +371,7 @@ public final class Grpc {
 
         y_ = 0;
 
-        z_ = 0D;
+        value_ = 0D;
 
         return this;
       }
@@ -401,7 +401,7 @@ public final class Grpc {
         Grpc.Coordinate result = new Grpc.Coordinate(this);
         result.x_ = x_;
         result.y_ = y_;
-        result.z_ = z_;
+        result.value_ = value_;
         onBuilt();
         return result;
       }
@@ -456,8 +456,8 @@ public final class Grpc {
         if (other.getY() != 0) {
           setY(other.getY());
         }
-        if (other.getZ() != 0D) {
-          setZ(other.getZ());
+        if (other.getValue() != 0D) {
+          setValue(other.getValue());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -540,28 +540,28 @@ public final class Grpc {
         return this;
       }
 
-      private double z_ ;
+      private double value_ ;
       /**
-       * <code>double z = 3;</code>
+       * <code>double value = 3;</code>
        */
-      public double getZ() {
-        return z_;
+      public double getValue() {
+        return value_;
       }
       /**
-       * <code>double z = 3;</code>
+       * <code>double value = 3;</code>
        */
-      public Builder setZ(double value) {
+      public Builder setValue(double value) {
         
-        z_ = value;
+        value_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>double z = 3;</code>
+       * <code>double value = 3;</code>
        */
-      public Builder clearZ() {
+      public Builder clearValue() {
         
-        z_ = 0D;
+        value_ = 0D;
         onChanged();
         return this;
       }
@@ -4522,18 +4522,18 @@ public final class Grpc {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\ngrpc.proto\"-\n\nCoordinate\022\t\n\001x\030\001 \001(\005\022\t\n" +
-      "\001y\030\002 \001(\005\022\t\n\001z\030\003 \001(\001\")\n\005Field\022 \n\013coordina" +
-      "tes\030\001 \003(\0132\013.Coordinate\"\'\n\rFieldSequence\022" +
-      "\026\n\006fields\030\001 \003(\0132\006.Field\"-\n\nFitRequest\022\037\n" +
-      "\007fitData\030\001 \001(\0132\016.FieldSequence\"\r\n\013FitRes" +
-      "ponse\">\n\016PredictRequest\022\035\n\005field\030\001 \001(\0132\016" +
-      ".FieldSequence\022\r\n\005steps\030\002 \001(\005\";\n\022Predict" +
-      "ionResponse\022%\n\rpredictedData\030\001 \001(\0132\016.Fie" +
-      "ldSequence2i\n\021PredictionService\022#\n\003fit\022\016" +
-      ".FieldSequence\032\014.FitResponse\022/\n\007predict\022" +
-      "\017.PredictRequest\032\023.PredictionResponseb\006p" +
-      "roto3"
+      "\n\ngrpc.proto\"1\n\nCoordinate\022\t\n\001x\030\001 \001(\005\022\t\n" +
+      "\001y\030\002 \001(\005\022\r\n\005value\030\003 \001(\001\")\n\005Field\022 \n\013coor" +
+      "dinates\030\001 \003(\0132\013.Coordinate\"\'\n\rFieldSeque" +
+      "nce\022\026\n\006fields\030\001 \003(\0132\006.Field\"-\n\nFitReques" +
+      "t\022\037\n\007fitData\030\001 \001(\0132\016.FieldSequence\"\r\n\013Fi" +
+      "tResponse\">\n\016PredictRequest\022\035\n\005field\030\001 \001" +
+      "(\0132\016.FieldSequence\022\r\n\005steps\030\002 \001(\005\";\n\022Pre" +
+      "dictionResponse\022%\n\rpredictedData\030\001 \001(\0132\016" +
+      ".FieldSequence2i\n\021PredictionService\022#\n\003f" +
+      "it\022\016.FieldSequence\032\014.FitResponse\022/\n\007pred" +
+      "ict\022\017.PredictRequest\032\023.PredictionRespons" +
+      "eb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4552,7 +4552,7 @@ public final class Grpc {
     internal_static_Coordinate_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Coordinate_descriptor,
-        new java.lang.String[] { "X", "Y", "Z", });
+        new java.lang.String[] { "X", "Y", "Value", });
     internal_static_Field_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_Field_fieldAccessorTable = new
