@@ -15,12 +15,12 @@ from datafold.pcfold import (
     TSCDataFrame,
 )
 
-from PotFieldPrediction.src.python.models.base import BaseModel
+from .base import BaseModel
 
 
 class EDMDModel(BaseModel):
     @staticmethod
-    def fit(data: pd.DataFrame, n_components: int = 10) -> EDMD:
+    def fit(data: TSCDataFrame, n_components: int = 10) -> EDMD:
         """
         this function fitting Dmd Model and reshape Data
 
@@ -47,19 +47,8 @@ class EDMDModel(BaseModel):
             sort_koopman_triplets=True,
             verbose=True,
         )
+        return model.fit(data)
 
-        train = TSCDataFrame.from_tensor(
-            np.float32(
-                np.reshape(
-                    data,
-                    (1, data.shape[0], -1),
-                )
-            )
-        )
-        try:
-            return model.fit(train)
-        except:
-            raise Exception("Split data in train and test first")
 
     @staticmethod
     def predict(model: EDMD, data: TSCDataFrame, time_value: int = 30) -> np.array:
@@ -75,15 +64,7 @@ class EDMDModel(BaseModel):
             np.array
 
         """
-        predict_data = TSCDataFrame.from_tensor(
-            np.float32(
-                np.reshape(
-                    data,
-                    (1, data.shape[0], -1),
-                )
-            )
-        )
         return model.predict(
-            predict_data.loc[[(0, 0)]],
+            data,
             time_values=[i for i in range(time_value)],
         )
