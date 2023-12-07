@@ -8,7 +8,7 @@ import java.io.IOException;
 public class grpcServer {
 
     public static void main(String[] args) throws IOException {
-        Server server = ServerBuilder.forPort(9090).addService(new grpcClient()).build();
+        Server server = ServerBuilder.forPort(9090).maxInboundMessageSize(25 * 1024 * 1024).addService(new grpcService()).build();
 
         server.start();
 

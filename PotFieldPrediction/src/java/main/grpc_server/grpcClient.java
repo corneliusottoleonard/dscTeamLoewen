@@ -6,35 +6,57 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import mock.*;
 
+import java.io.File;
 import java.util.List;
 
-public class grpcClientTest {
+public class grpcClient {
 
     public static void main(String[] args) {
         // Create a channel to connect to the server
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090)
-                .usePlaintext() // This is just for the sake of simplicity. In production, you should use encryption.
+                .usePlaintext()
+                .maxInboundMessageSize(25 * 1024 * 1024)// This is just for the sake of simplicity. In production, you should use encryption.
                 .build();
 
         // Example of using the generated gRPC client (assuming a running gRPC server)
         PredictionServiceGrpc.PredictionServiceBlockingStub blockingStub = PredictionServiceGrpc.newBlockingStub(channel);
 
+        String folderPath = "src/python/tests/assets/potFields_small";
+        int csvFileCount = 0;
+
+        File folder = new File(folderPath);
+        File[] files = folder.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile() && file.getName().toLowerCase().endsWith(".csv")) {
+                    csvFileCount++;
+                }
+            }
+        } else {
+            System.out.println("Invalid folder path.");
+        }
+
         FieldSequenceI fieldSequence = new FieldSequence();
-        fieldSequence.addField("src/python/tests/assets/potFields_small/rimea-half-floor-origin-0-destination-0-DYN_AVOID-Standard-0.csv");
+        for (int i = 0 ; i < csvFileCount ; i++) {
+            fieldSequence.addField("src/python/tests/assets/potFields_small/rimea-half-floor-origin-0-destination-0-DYN_AVOID-Standard-" + i + ".csv");
+        }
         List<FieldI> fields = fieldSequence.getFields();
-        FieldI field1 = fields.get(0);
 
+        Grpc.FieldSequence.Builder fieldSequenceRequest = Grpc.FieldSequence.newBuilder();
+        for (int i = 0 ; i < fields.size() - 1; i++) {
+            FieldI field = fields.get(i);
+            List<CoordinateI> coordinates = field.getCoordinates();
+            for (int j = 0 ; j < coordinates.size(); j ++) {
+                Grpc.Coordinate coordinateRequest = Grpc.Coordinate.newBuilder()
+                        .setX(coordinates.get(j).getxIndex())
+                        .setY(coordinates.get(j).getyIndex())
+                        .setValue(coordinates.get(j).getValue()).build();
+                Grpc.Field fieldRequest = Grpc.Field.newBuilder().addCoordinates(coordinateRequest).build();
+                fieldSequenceRequest.addFields(fieldRequest);
+            }
 
-        Grpc.Coordinate coordinateRequest = Grpc.Coordinate.newBuilder()
-                .setX(field1.getCoordinates().get(0).getxIndex())
-                .setY(field1.getCoordinates().get(0).getyIndex())
-                .setZ(field1.getCoordinates().get(0).getValue()).build();
-
-        Grpc.Field fieldRequest = Grpc.Field.newBuilder().setCoordinates(0, coordinateRequest).build();
-
-        Grpc.FieldSequence fieldSequenceRequest = Grpc.FieldSequence.newBuilder()
-                .setFields(0,fieldRequest).build();
-
+        }
 
         Grpc.FitRequest fitRequest = Grpc.FitRequest.newBuilder().setFitData(fieldSequenceRequest).build();
 
@@ -42,7 +64,7 @@ public class grpcClientTest {
                 .setSteps(10).build();
 
 
-        // Call the predict RPC
+        // Call to predict RPC
         Grpc.PredictionResponse predictionResponse = blockingStub.predict(predictRequest);
         System.out.println("Prediction response: " + predictionResponse);
 
