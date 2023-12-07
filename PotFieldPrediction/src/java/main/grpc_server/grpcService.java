@@ -7,7 +7,7 @@ import io.grpc.stub.StreamObserver;
 public class grpcService extends PredictionServiceGrpc.PredictionServiceImplBase {
 
     @Override
-    public void fit(Grpc.FieldSequence request, StreamObserver<Grpc.FitResponse> responseObserver) {
+    public void fit(Grpc.FitRequest request, StreamObserver<Grpc.FitResponse> responseObserver) {
         // Implement your fit logic here
         Grpc.FitResponse response = Grpc.FitResponse.newBuilder().build();
         responseObserver.onNext(response);

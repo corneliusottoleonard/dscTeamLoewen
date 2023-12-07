@@ -27,28 +27,28 @@ public final class PredictionServiceGrpc {
   public static final String SERVICE_NAME = "PredictionService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<Grpc.FieldSequence,
+  private static volatile io.grpc.MethodDescriptor<Grpc.FitRequest,
       Grpc.FitResponse> getFitMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "fit",
-      requestType = Grpc.FieldSequence.class,
+      requestType = Grpc.FitRequest.class,
       responseType = Grpc.FitResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<Grpc.FieldSequence,
+  public static io.grpc.MethodDescriptor<Grpc.FitRequest,
       Grpc.FitResponse> getFitMethod() {
-    io.grpc.MethodDescriptor<Grpc.FieldSequence, Grpc.FitResponse> getFitMethod;
+    io.grpc.MethodDescriptor<Grpc.FitRequest, Grpc.FitResponse> getFitMethod;
     if ((getFitMethod = PredictionServiceGrpc.getFitMethod) == null) {
       synchronized (PredictionServiceGrpc.class) {
         if ((getFitMethod = PredictionServiceGrpc.getFitMethod) == null) {
           PredictionServiceGrpc.getFitMethod = getFitMethod = 
-              io.grpc.MethodDescriptor.<Grpc.FieldSequence, Grpc.FitResponse>newBuilder()
+              io.grpc.MethodDescriptor.<Grpc.FitRequest, Grpc.FitResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "PredictionService", "fit"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  Grpc.FieldSequence.getDefaultInstance()))
+                  Grpc.FitRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   Grpc.FitResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new PredictionServiceMethodDescriptorSupplier("fit"))
@@ -120,7 +120,7 @@ public final class PredictionServiceGrpc {
 
     /**
      */
-    public void fit(Grpc.FieldSequence request,
+    public void fit(Grpc.FitRequest request,
         io.grpc.stub.StreamObserver<Grpc.FitResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getFitMethod(), responseObserver);
     }
@@ -138,7 +138,7 @@ public final class PredictionServiceGrpc {
             getFitMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                Grpc.FieldSequence,
+                Grpc.FitRequest,
                 Grpc.FitResponse>(
                   this, METHODID_FIT)))
           .addMethod(
@@ -172,7 +172,7 @@ public final class PredictionServiceGrpc {
 
     /**
      */
-    public void fit(Grpc.FieldSequence request,
+    public void fit(Grpc.FitRequest request,
         io.grpc.stub.StreamObserver<Grpc.FitResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getFitMethod(), getCallOptions()), request, responseObserver);
@@ -207,7 +207,7 @@ public final class PredictionServiceGrpc {
 
     /**
      */
-    public Grpc.FitResponse fit(Grpc.FieldSequence request) {
+    public Grpc.FitResponse fit(Grpc.FitRequest request) {
       return blockingUnaryCall(
           getChannel(), getFitMethod(), getCallOptions(), request);
     }
@@ -241,7 +241,7 @@ public final class PredictionServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<Grpc.FitResponse> fit(
-        Grpc.FieldSequence request) {
+        Grpc.FitRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getFitMethod(), getCallOptions()), request);
     }
@@ -276,7 +276,7 @@ public final class PredictionServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_FIT:
-          serviceImpl.fit((Grpc.FieldSequence) request,
+          serviceImpl.fit((Grpc.FitRequest) request,
               (io.grpc.stub.StreamObserver<Grpc.FitResponse>) responseObserver);
           break;
         case METHODID_PREDICT:
