@@ -31,6 +31,6 @@ message PredictionResponse {
 }
 
 service PredictionService {
-  rpc fit (FieldSequence) returns (FitResponse);
+  rpc fit (FitRequest) returns (FitResponse);
   rpc predict (PredictRequest) returns (PredictionResponse);
 }
