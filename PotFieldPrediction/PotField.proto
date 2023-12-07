@@ -3,6 +3,7 @@ syntax = "proto3";
 message Coordinate {
     int32 x = 1;
     int32 y = 2;
+    double z = 3;
 }
 
 message Field {
@@ -21,7 +22,7 @@ message FitResponse {
 }
 
 message PredictRequest {
-    FieldSequence field = 1;
+    FieldSequence predictData = 1;
     int32 steps = 2;
 }
 
@@ -30,6 +31,6 @@ message PredictionResponse {
 }
 
 service PredictionService {
-    rpc fit (FieldSequence) returns (FitResponse);
+    rpc fit (FitRequest) returns (FitResponse);
     rpc predict (PredictRequest) returns (PredictionResponse);
 }

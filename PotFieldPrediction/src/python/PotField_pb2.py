@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0ePotField.proto\"\"\n\nCoordinate\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x05\")\n\x05\x46ield\x12 \n\x0b\x63oordinates\x18\x01 \x03(\x0b\x32\x0b.Coordinate\"\'\n\rFieldSequence\x12\x16\n\x06\x66ields\x18\x01 \x03(\x0b\x32\x06.Field\"-\n\nFitRequest\x12\x1f\n\x07\x66itData\x18\x01 \x01(\x0b\x32\x0e.FieldSequence\"\r\n\x0b\x46itResponse\">\n\x0ePredictRequest\x12\x1d\n\x05\x66ield\x18\x01 \x01(\x0b\x32\x0e.FieldSequence\x12\r\n\x05steps\x18\x02 \x01(\x05\";\n\x12PredictionResponse\x12%\n\rpredictedData\x18\x01 \x01(\x0b\x32\x0e.FieldSequence2i\n\x11PredictionService\x12#\n\x03\x66it\x12\x0e.FieldSequence\x1a\x0c.FitResponse\x12/\n\x07predict\x12\x0f.PredictRequest\x1a\x13.PredictionResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0ePotField.proto\"-\n\nCoordinate\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x05\x12\t\n\x01z\x18\x03 \x01(\x01\")\n\x05\x46ield\x12 \n\x0b\x63oordinates\x18\x01 \x03(\x0b\x32\x0b.Coordinate\"\'\n\rFieldSequence\x12\x16\n\x06\x66ields\x18\x01 \x03(\x0b\x32\x06.Field\"-\n\nFitRequest\x12\x1f\n\x07\x66itData\x18\x01 \x01(\x0b\x32\x0e.FieldSequence\"\r\n\x0b\x46itResponse\"D\n\x0ePredictRequest\x12#\n\x0bpredictData\x18\x01 \x01(\x0b\x32\x0e.FieldSequence\x12\r\n\x05steps\x18\x02 \x01(\x05\";\n\x12PredictionResponse\x12%\n\rpredictedData\x18\x01 \x01(\x0b\x32\x0e.FieldSequence2f\n\x11PredictionService\x12 \n\x03\x66it\x12\x0b.FitRequest\x1a\x0c.FitResponse\x12/\n\x07predict\x12\x0f.PredictRequest\x1a\x13.PredictionResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -21,19 +21,19 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'PotField_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _globals['_COORDINATE']._serialized_start=18
-  _globals['_COORDINATE']._serialized_end=52
-  _globals['_FIELD']._serialized_start=54
-  _globals['_FIELD']._serialized_end=95
-  _globals['_FIELDSEQUENCE']._serialized_start=97
-  _globals['_FIELDSEQUENCE']._serialized_end=136
-  _globals['_FITREQUEST']._serialized_start=138
-  _globals['_FITREQUEST']._serialized_end=183
-  _globals['_FITRESPONSE']._serialized_start=185
-  _globals['_FITRESPONSE']._serialized_end=198
-  _globals['_PREDICTREQUEST']._serialized_start=200
-  _globals['_PREDICTREQUEST']._serialized_end=262
-  _globals['_PREDICTIONRESPONSE']._serialized_start=264
-  _globals['_PREDICTIONRESPONSE']._serialized_end=323
-  _globals['_PREDICTIONSERVICE']._serialized_start=325
-  _globals['_PREDICTIONSERVICE']._serialized_end=430
+  _globals['_COORDINATE']._serialized_end=63
+  _globals['_FIELD']._serialized_start=65
+  _globals['_FIELD']._serialized_end=106
+  _globals['_FIELDSEQUENCE']._serialized_start=108
+  _globals['_FIELDSEQUENCE']._serialized_end=147
+  _globals['_FITREQUEST']._serialized_start=149
+  _globals['_FITREQUEST']._serialized_end=194
+  _globals['_FITRESPONSE']._serialized_start=196
+  _globals['_FITRESPONSE']._serialized_end=209
+  _globals['_PREDICTREQUEST']._serialized_start=211
+  _globals['_PREDICTREQUEST']._serialized_end=279
+  _globals['_PREDICTIONRESPONSE']._serialized_start=281
+  _globals['_PREDICTIONRESPONSE']._serialized_end=340
+  _globals['_PREDICTIONSERVICE']._serialized_start=342
+  _globals['_PREDICTIONSERVICE']._serialized_end=444
 # @@protoc_insertion_point(module_scope)

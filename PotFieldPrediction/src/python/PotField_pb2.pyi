@@ -6,12 +6,14 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Coordinate(_message.Message):
-    __slots__ = ["x", "y"]
+    __slots__ = ["x", "y", "z"]
     X_FIELD_NUMBER: _ClassVar[int]
     Y_FIELD_NUMBER: _ClassVar[int]
+    Z_FIELD_NUMBER: _ClassVar[int]
     x: int
     y: int
-    def __init__(self, x: _Optional[int] = ..., y: _Optional[int] = ...) -> None: ...
+    z: float
+    def __init__(self, x: _Optional[int] = ..., y: _Optional[int] = ..., z: _Optional[float] = ...) -> None: ...
 
 class Field(_message.Message):
     __slots__ = ["coordinates"]
@@ -36,12 +38,12 @@ class FitResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class PredictRequest(_message.Message):
-    __slots__ = ["field", "steps"]
-    FIELD_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ["predictData", "steps"]
+    PREDICTDATA_FIELD_NUMBER: _ClassVar[int]
     STEPS_FIELD_NUMBER: _ClassVar[int]
-    field: FieldSequence
+    predictData: FieldSequence
     steps: int
-    def __init__(self, field: _Optional[_Union[FieldSequence, _Mapping]] = ..., steps: _Optional[int] = ...) -> None: ...
+    def __init__(self, predictData: _Optional[_Union[FieldSequence, _Mapping]] = ..., steps: _Optional[int] = ...) -> None: ...
 
 class PredictionResponse(_message.Message):
     __slots__ = ["predictedData"]

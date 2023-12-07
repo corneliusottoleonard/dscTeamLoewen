@@ -16,7 +16,7 @@ class PredictionServiceStub(object):
         """
         self.fit = channel.unary_unary(
                 '/PredictionService/fit',
-                request_serializer=PotField__pb2.FieldSequence.SerializeToString,
+                request_serializer=PotField__pb2.FitRequest.SerializeToString,
                 response_deserializer=PotField__pb2.FitResponse.FromString,
                 )
         self.predict = channel.unary_unary(
@@ -46,7 +46,7 @@ def add_PredictionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'fit': grpc.unary_unary_rpc_method_handler(
                     servicer.fit,
-                    request_deserializer=PotField__pb2.FieldSequence.FromString,
+                    request_deserializer=PotField__pb2.FitRequest.FromString,
                     response_serializer=PotField__pb2.FitResponse.SerializeToString,
             ),
             'predict': grpc.unary_unary_rpc_method_handler(
@@ -76,7 +76,7 @@ class PredictionService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/PredictionService/fit',
-            PotField__pb2.FieldSequence.SerializeToString,
+            PotField__pb2.FitRequest.SerializeToString,
             PotField__pb2.FitResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
