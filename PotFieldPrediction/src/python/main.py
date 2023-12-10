@@ -1,31 +1,14 @@
 from concurrent import futures
 
-from datafold.pcfold import TSCDataFrame
 import grpc
 from grpc_reflection.v1alpha import reflection
-import pandas as pd
+import numpy as np
 
 import PotField_pb2
 import PotField_pb2_grpc
 from models import edmd
+import conversion
 
-
-def convert_fieldsequence_to_dataframe(data: 'PotField_pb2.FieldSequence') -> TSCDataFrame:
-    # TODO:  inefficient af, fix it
-    return TSCDataFrame.from_frame_list((
-        pd.DataFrame.from_records((
-            {'x': coord.x, 'y': coord.y, 'z': coord.z} for coord in field.coordinates
-        )) for field in data
-    ))
-
-def convert_dataframe_to_fieldsequence(data: TSCDataFrame) -> PotField_pb2.FieldSequence:
-    # TODO:  inefficient af, fix it
-    return PotField_pb2.FieldSequence(fields=(
-        PotField_pb2.Field(coordinates=(
-            PotField_pb2.Coordinate(x=coord['x'], y=coord['y'], z=coord['z'])
-                for _, coord in f.iterrows()
-        )) for _, f in data.itertimeseries()
-    ))
 
 class PotFieldPredictionService(PotField_pb2_grpc.PredictionServiceServicer):
     def __init__(self) -> None:
@@ -33,18 +16,17 @@ class PotFieldPredictionService(PotField_pb2_grpc.PredictionServiceServicer):
         super().__init__()
 
     def fit(self, request, context):
-        print("Start data conversion")
-        data = convert_fieldsequence_to_dataframe(request.fitData.fields)
-        print("Start data conversion")
-        model = edmd.EDMDModel.fit(data)
+        c, v = conversion.convert_fieldsequence_to_ndarray(request.fitData)
+        model = edmd.EDMDModel.fit(c, v)
         self.model = model
         return
 
     def predict(self, request, context):
         if not self.model: raise Exception('Fitting was not yet executed')
-        data = convert_fieldsequence_to_dataframe(request.predictData.fields)
-        prediction = self.model.predict(data)
-        return convert_dataframe_to_fieldsequence(prediction)
+        c, v = conversion.convert_fieldsequence_to_dataframe(request.predictData.fields)
+        new_c, prediction = edmd.EDMDModel.predict(self.model, c, v)
+        return conversion.convert_ndarray_to_fieldsequence(new_c, prediction.to_numpy(np.float64))
+
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10), options = [

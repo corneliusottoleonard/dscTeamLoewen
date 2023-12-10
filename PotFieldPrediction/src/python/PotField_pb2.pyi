@@ -6,14 +6,14 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Coordinate(_message.Message):
-    __slots__ = ["x", "y", "z"]
+    __slots__ = ["x", "y", "value"]
     X_FIELD_NUMBER: _ClassVar[int]
     Y_FIELD_NUMBER: _ClassVar[int]
-    Z_FIELD_NUMBER: _ClassVar[int]
+    VALUE_FIELD_NUMBER: _ClassVar[int]
     x: int
     y: int
-    z: float
-    def __init__(self, x: _Optional[int] = ..., y: _Optional[int] = ..., z: _Optional[float] = ...) -> None: ...
+    value: float
+    def __init__(self, x: _Optional[int] = ..., y: _Optional[int] = ..., value: _Optional[float] = ...) -> None: ...
 
 class Field(_message.Message):
     __slots__ = ["coordinates"]
