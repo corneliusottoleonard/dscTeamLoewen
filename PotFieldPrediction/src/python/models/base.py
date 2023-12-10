@@ -1,42 +1,26 @@
-import pandas as pd
+from typing import Tuple
+
+from datafold import EDMD
+import datafold.dynfold as dfold
+import datafold.pcfold as pfold
+from datafold.pcfold import TSCDataFrame
 import numpy as np
 
 
-from datafold import (
-    EDMD,
-    DMDStandard,
-    TSCIdentity,
-)
-
-from datafold.pcfold import (
-    TSCDataFrame,
-)
-
-import datafold.dynfold as dfold
-import datafold.pcfold as pfold
-
-
 class BaseModel:
+
     @staticmethod
-    def create_defussion_maps(data: pd.DataFrame) -> dfold.DiffusionMaps:
-        """
-        this function reduce dimensionality of Features
+    def create_diffusion_maps(data: np.ndarray) -> dfold.DiffusionMaps:
+        """Reduce dimensionality of features by using diffusion maps. 
+
+        From group Wednesday.
 
         Args:
-            data:
-                Pandas.DataFrame
-            n_components:
-                int -> reduce faktor
+            data (np.ndarray): Two-dimensional point cloud of data to reduce.
 
         Returns:
-            dfold.DiffusionMaps
-
-        Raises:
-            None
-
-        Von idae Gruppe wednesday
+            dfold.DiffusionMaps: Fitted diffusion map.
         """
-        #
         pcm = pfold.PCManifold(data)
         pcm.optimize_parameters(
             n_subsample=int(np.round(data.shape[1]) * 0.50),
@@ -52,32 +36,40 @@ class BaseModel:
         return dmap
 
     @staticmethod
-    def fit(data: pd.DataFrame, n_components: int = 10) -> EDMD:
-        pass
+    def fit(coords: np.ndarray, values: np.ndarray) -> EDMD:
+        """Fit the model using the provided data as trainings data.
+
+        Args:
+            coords (np.ndarray): Coordinates of the `values`.
+            values (np.ndarray): As many values of training value.
+
+        Raises:
+            NotImplementedError: Raised if function of base class is called.
+
+        Returns:
+            EDMD: Fitted model.
+        """
+        raise NotImplementedError('Can\'t call `fit` method of base class.')
 
     @staticmethod
-    def predict(model: EDMD, data: TSCDataFrame, time_value: int = 30) -> np.array:
+    def predict(model: EDMD, coords: np.ndarray, values: np.ndarray, tsteps: int = 30)-> Tuple[np.ndarray, np.ndarray]:
+        """Predict the next `tsteps` steps using the `model` instance.
+
+        Args:
+            model (EDMD): Model to use for prediction.
+            coords (np.ndarray): Coordinates of the `values`.
+            values (np.ndarray): Values of the last time steps.
+            tsteps (int, optional): Steps to predict. Defaults to 30.
+
+        Returns:
+            Tuple[np.ndarray, np.ndarray]: Array with coordinates and array of shape
+            (`tsteps`, `coords.shape[1]`) with predicted values.
         """
-        this function predicting Dmd Model and reshape Data
-
-        Input:
-            model: EDMD
-            data: TSCDataFrame
-            Time_value: int = Default(30) -> amount of predictions made
-
-        Output:
-            np.array
-
-        """
-        predict_data = TSCDataFrame.from_tensor(
-            np.float32(
-                np.reshape(
-                    data,
-                    (1, data.shape[0], -1),
-                )
-            )
-        )
-        return model.predict(
+        num_coords = coords.shape[1]
+        predict_data = TSCDataFrame.from_tensor(values.reshape(1, -1, num_coords))
+        prediction = model.predict(
             predict_data.loc[[(0, 0)]],
-            time_values=[i for i in range(time_value)],
+            time_values=[i for i in range(tsteps)],
         )
+        new_coords = np.concatenate([[coords[0, :, :]] for _ in range(tsteps)], axis=0)
+        return new_coords, prediction.to_numpy(np.float64)

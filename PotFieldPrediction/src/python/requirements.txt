@@ -1,2 +1,4 @@
+Cython
+datafold
 grpcio-reflection
 grpcio
