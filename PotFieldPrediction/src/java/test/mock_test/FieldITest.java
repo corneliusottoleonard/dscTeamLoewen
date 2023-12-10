@@ -1,5 +1,9 @@
-package mock;
+package mock_test;
 
+import mock.Coordinate;
+import mock.CoordinateI;
+import mock.Field;
+import mock.FieldI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

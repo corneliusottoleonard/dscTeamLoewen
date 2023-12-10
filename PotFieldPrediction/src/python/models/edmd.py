@@ -18,6 +18,7 @@ class EDMDModel(BaseModel):
     @staticmethod
     def fit(coords: np.ndarray, values: np.ndarray) -> EDMD:
         num_coords = coords.shape[1]
+        print("debug: ", coords.shape)
         model = EDMD(
             dict_steps=[
                 (

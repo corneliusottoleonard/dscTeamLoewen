@@ -19,13 +19,13 @@ class PotFieldPredictionService(PotField_pb2_grpc.PredictionServiceServicer):
         c, v = conversion.convert_fieldsequence_to_ndarray(request.fitData)
         model = edmd.EDMDModel.fit(c, v)
         self.model = model
-        return
+        return PotField_pb2.PredictionResponse()
 
     def predict(self, request, context):
         if not self.model: raise Exception('Fitting was not yet executed')
-        c, v = conversion.convert_fieldsequence_to_dataframe(request.predictData.fields)
+        c, v = conversion.convert_fieldsequence_to_ndarray(request.predictData)
         new_c, prediction = edmd.EDMDModel.predict(self.model, c, v)
-        return conversion.convert_ndarray_to_fieldsequence(new_c, prediction.to_numpy(np.float64))
+        return conversion.convert_ndarray_to_fieldsequence(new_c, prediction)
 
 
 def serve():

@@ -1,5 +1,8 @@
-package mock;
+package mock_test;
 
+
+import mock.Coordinate;
+import mock.CoordinateI;
 
 import static org.junit.jupiter.api.Assertions.*;
 

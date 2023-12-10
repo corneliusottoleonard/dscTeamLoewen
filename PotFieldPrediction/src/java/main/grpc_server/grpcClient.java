@@ -45,27 +45,28 @@ public class grpcClient {
 
         Grpc.FieldSequence.Builder fieldSequenceRequest = Grpc.FieldSequence.newBuilder();
         for (int i = 0 ; i < fields.size() - 1; i++) {
+
             FieldI field = fields.get(i);
             List<CoordinateI> coordinates = field.getCoordinates();
+
+            Grpc.Field.Builder fieldRequest = Grpc.Field.newBuilder();
+
             for (int j = 0 ; j < coordinates.size(); j ++) {
                 Grpc.Coordinate coordinateRequest = Grpc.Coordinate.newBuilder()
                         .setX(coordinates.get(j).getxIndex())
                         .setY(coordinates.get(j).getyIndex())
                         .setValue(coordinates.get(j).getValue()).build();
-                Grpc.Field fieldRequest = Grpc.Field.newBuilder().addCoordinates(coordinateRequest).build();
-                fieldSequenceRequest.addFields(fieldRequest);
+                fieldRequest.addCoordinates(coordinateRequest);
             }
-
+            fieldSequenceRequest.addFields(fieldRequest);
         }
 
         Grpc.FitRequest fitRequest = Grpc.FitRequest.newBuilder().setFitData(fieldSequenceRequest).build();
-
-        Grpc.PredictRequest predictRequest = Grpc.PredictRequest.newBuilder().setField(fieldSequenceRequest)
-                .setSteps(10).build();
-
-
         // Call to predict RPC
         Grpc.FitResponse fitResponse = blockingStub.fit(fitRequest);
+
+        Grpc.PredictRequest predictRequest = Grpc.PredictRequest.newBuilder().setField(fieldSequenceRequest)
+                .setSteps(5).build();
         Grpc.PredictionResponse predictionResponse = blockingStub.predict(predictRequest);
         System.out.println("Prediction response: " + predictionResponse);
 
