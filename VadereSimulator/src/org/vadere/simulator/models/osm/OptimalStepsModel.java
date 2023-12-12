@@ -27,6 +27,8 @@ import org.vadere.state.types.UpdateType;
 import org.vadere.util.geometry.shapes.VPoint;
 import org.vadere.util.geometry.shapes.VShape;
 import org.vadere.util.logging.Logger;
+import org.vadere.simulator.models.potential.fields.PotentialFieldEDMD;
+
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -51,11 +53,14 @@ public class OptimalStepsModel implements MainModel, PotentialFieldModel {
 	private double lastSimTimeInSec;
 	private ExecutorService executorService;
 	private List<Model> models = new LinkedList<>();
+	private PotentialFieldEDMD myEDMDField;
+	private IPotentialFieldTargetGrid iPotentialTargetGrid;
 
 	public OptimalStepsModel() {
 		this.speedAdjusters = new LinkedList<>();
 		this.stepSizeAdjusters = new LinkedList<>();
 	}
+
 
 	@Override
 	public void initialize(List<Attributes> modelAttributesList, Domain domain,
@@ -65,69 +70,80 @@ public class OptimalStepsModel implements MainModel, PotentialFieldModel {
 				Model.findAttributes(modelAttributesList, AttributesOSM.class), logger);
 	}
 
-
 	public void initialize(List<Attributes> modelAttributesList, Domain domain,
-						   AttributesAgent attributesPedestrian, Random random, AttributesOSM atm, Logger logger) {
+    	                   AttributesAgent attributesPedestrian, Random random, AttributesOSM atm, Logger logger) {
 
-		this.attributesOSM = atm;
-		this.domain = domain;
-		this.random = random;
-		this.attributesPedestrian = attributesPedestrian;
+    	this.attributesOSM = atm;
+	    this.domain = domain;
+	    this.random = random;
+	    this.attributesPedestrian = attributesPedestrian;
 
-		final SubModelBuilder subModelBuilder = new SubModelBuilder(modelAttributesList, domain,
-				attributesPedestrian, random);
+	    final SubModelBuilder subModelBuilder = new SubModelBuilder(modelAttributesList, domain,
+    	        attributesPedestrian, random);
 		logger.debug("build subModels");
-		subModelBuilder.buildSubModels(attributesOSM.getSubmodels());
-		subModelBuilder.addBuildedSubModelsToList(models);
+	    subModelBuilder.buildSubModels(attributesOSM.getSubmodels());
+    	subModelBuilder.addBuildedSubModelsToList(models);
 
-		logger.debug("create Target potential field");
-		IPotentialFieldTargetGrid iPotentialTargetGrid = IPotentialFieldTargetGrid.createPotentialField(
-				modelAttributesList, domain, attributesPedestrian, attributesOSM.getTargetPotentialModel());
+	    logger.debug("create Target potential field");
 
-		this.potentialFieldTarget = iPotentialTargetGrid;
-		models.add(iPotentialTargetGrid);
+    	String targetPotentialModel = attributesOSM.getTargetPotentialModel();
 
-		this.potentialFieldObstacle = PotentialFieldObstacle.createPotentialField(
-				modelAttributesList, domain, attributesPedestrian, random, attributesOSM.getObstaclePotentialModel());
-		this.potentialFieldPedestrian = PotentialFieldAgent.createPotentialField(
-				modelAttributesList, domain, attributesPedestrian, random, attributesOSM.getPedestrianPotentialModel());
+	    if ("org.vadere.simulator.models.potential.fields.PotentialFieldEDMD".equals(targetPotentialModel)) {
+    	    myEDMDField = new PotentialFieldEDMD(domain, attributesPedestrian);
+        	models.add(myEDMDField);
+    	} else if ("org.vadere.simulator.models.potential.fields.PotentialFieldTargetGrid".equals(targetPotentialModel)) {
+        	IPotentialFieldTargetGrid iPotentialTargetGrid = IPotentialFieldTargetGrid.createPotentialField(
+            	    modelAttributesList, domain, attributesPedestrian, attributesOSM.getTargetPotentialModel());
 
-		Optional<CentroidGroupModel> opCentroidGroupModel = models.stream().
-				filter(ac -> ac instanceof CentroidGroupModel).map(ac -> (CentroidGroupModel) ac).findAny();
+	        this.potentialFieldTarget = iPotentialTargetGrid;
+    	    models.add(iPotentialTargetGrid);
+    	} else {
+        	// Handle unknown potential field type or provide a default
+       		throw new IllegalArgumentException("Unknown potential field model: " + targetPotentialModel);
+    	}
 
-		if (opCentroidGroupModel.isPresent()) {
+    	this.potentialFieldObstacle = PotentialFieldObstacle.createPotentialField(
+    	        modelAttributesList, domain, attributesPedestrian, random, attributesOSM.getPedestrianPotentialModel());
+	    this.potentialFieldPedestrian = PotentialFieldAgent.createPotentialField(
+        	    modelAttributesList, domain, attributesPedestrian, random, attributesOSM.getPedestrianPotentialModel());
 
-			CentroidGroupModel centroidGroupModel = opCentroidGroupModel.get();
-			centroidGroupModel.setPotentialFieldTarget(iPotentialTargetGrid);
+    	Optional<CentroidGroupModel> opCentroidGroupModel = models.stream().
+        	    filter(ac -> ac instanceof CentroidGroupModel).map(ac -> (CentroidGroupModel) ac).findAny();
 
-			this.potentialFieldPedestrian =
-					new CentroidGroupPotential(centroidGroupModel,
-							potentialFieldPedestrian, potentialFieldTarget, centroidGroupModel.getAttributesCGM());
+    	if (opCentroidGroupModel.isPresent()) {
 
-			//this.stepSizeAdjusters.add(new CentroidGroupStepSizeAdjuster(centroidGroupModel));
-			this.speedAdjusters.add(new CentroidGroupSpeedAdjuster(centroidGroupModel));
-		}
+        	CentroidGroupModel centroidGroupModel = opCentroidGroupModel.get();
+        	centroidGroupModel.setPotentialFieldTarget(iPotentialTargetGrid);
 
-		this.stepCircleOptimizer = StepCircleOptimizer.create(
-				attributesOSM, random, domain.getTopography(), iPotentialTargetGrid);
+       		this.potentialFieldPedestrian =
+            	    new CentroidGroupPotential(centroidGroupModel,
+                	        potentialFieldPedestrian, potentialFieldTarget, centroidGroupModel.getAttributesCGM());
 
-		// TODO implement a step speed adjuster for this!
-		if (attributesPedestrian.isDensityDependentSpeed()) {
-			throw new UnsupportedOperationException("densityDependentSpeed not jet implemented.");
-			//this.speedAdjusters.add(new SpeedAdjusterWeidmann());
-		}
+    	    //this.stepSizeAdjusters.add(new CentroidGroupStepSizeAdjuster(centroidGroupModel));
+        	this.speedAdjusters.add(new CentroidGroupSpeedAdjuster(centroidGroupModel));
+    	}
 
-		if (attributesOSM.getUpdateType() == UpdateType.PARALLEL) {
-			this.executorService = Executors.newFixedThreadPool(8);
-		} else {
-			this.executorService = null;
-		}
+   		this.stepCircleOptimizer = StepCircleOptimizer.create(
+        	    attributesOSM, random, domain.getTopography(), iPotentialTargetGrid);
 
-		this.updateSchemeOSM = createUpdateScheme(modelAttributesList, domain.getTopography(), attributesOSM);
-		this.domain.getTopography().addElementAddedListener(Pedestrian.class, updateSchemeOSM);
-		this.domain.getTopography().addElementRemovedListener(Pedestrian.class, updateSchemeOSM);
+    	// TODO implement a step speed adjuster for this!
+    	if (attributesPedestrian.isDensityDependentSpeed()) {
+        	throw new UnsupportedOperationException("densityDependentSpeed not jet implemented.");
+        	//this.speedAdjusters.add(new SpeedAdjusterWeidmann());
+    	}
 
-		models.add(this);
+    	if (attributesOSM.getUpdateType() == UpdateType.PARALLEL) {
+        	this.executorService = Executors.newFixedThreadPool(8);
+    	} else {
+        	this.executorService = null;
+    	}
+
+    	this.updateSchemeOSM = createUpdateScheme(modelAttributesList, domain.getTopography(), attributesOSM);
+    	this.domain.getTopography().addElementAddedListener(Pedestrian.class, updateSchemeOSM);
+    	this.domain.getTopography().addElementRemovedListener(Pedestrian.class, updateSchemeOSM);
+
+    	models.add(this);
+
 	}
 
 	// Dirty quick implementation to test it! TODO: refactoring!
