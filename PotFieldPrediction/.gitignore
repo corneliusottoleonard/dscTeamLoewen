@@ -2,11 +2,7 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-<<<<<<< HEAD
 **/.idea
-=======
-.idea/
->>>>>>> 7-add-ipc-to-python-and-java-script
 
 ### Eclipse ###
 .apt_generated

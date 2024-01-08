@@ -1,5 +1,3 @@
-package grpc_generated;
-
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
@@ -19,7 +17,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.15.0)",
-    comments = "Source: grpc.proto")
+    comments = "Source: PotField.proto")
 public final class PredictionServiceGrpc {
 
   private PredictionServiceGrpc() {}
@@ -27,30 +25,30 @@ public final class PredictionServiceGrpc {
   public static final String SERVICE_NAME = "PredictionService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<Grpc.FitRequest,
-      Grpc.FitResponse> getFitMethod;
+  private static volatile io.grpc.MethodDescriptor<PotField.FitRequest,
+      PotField.FitResponse> getFitMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "fit",
-      requestType = Grpc.FitRequest.class,
-      responseType = Grpc.FitResponse.class,
+      requestType = PotField.FitRequest.class,
+      responseType = PotField.FitResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<Grpc.FitRequest,
-      Grpc.FitResponse> getFitMethod() {
-    io.grpc.MethodDescriptor<Grpc.FitRequest, Grpc.FitResponse> getFitMethod;
+  public static io.grpc.MethodDescriptor<PotField.FitRequest,
+      PotField.FitResponse> getFitMethod() {
+    io.grpc.MethodDescriptor<PotField.FitRequest, PotField.FitResponse> getFitMethod;
     if ((getFitMethod = PredictionServiceGrpc.getFitMethod) == null) {
       synchronized (PredictionServiceGrpc.class) {
         if ((getFitMethod = PredictionServiceGrpc.getFitMethod) == null) {
           PredictionServiceGrpc.getFitMethod = getFitMethod = 
-              io.grpc.MethodDescriptor.<Grpc.FitRequest, Grpc.FitResponse>newBuilder()
+              io.grpc.MethodDescriptor.<PotField.FitRequest, PotField.FitResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "PredictionService", "fit"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  Grpc.FitRequest.getDefaultInstance()))
+                  PotField.FitRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  Grpc.FitResponse.getDefaultInstance()))
+                  PotField.FitResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new PredictionServiceMethodDescriptorSupplier("fit"))
                   .build();
           }
@@ -59,30 +57,30 @@ public final class PredictionServiceGrpc {
      return getFitMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<Grpc.PredictRequest,
-      Grpc.PredictionResponse> getPredictMethod;
+  private static volatile io.grpc.MethodDescriptor<PotField.PredictRequest,
+      PotField.PredictionResponse> getPredictMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "predict",
-      requestType = Grpc.PredictRequest.class,
-      responseType = Grpc.PredictionResponse.class,
+      requestType = PotField.PredictRequest.class,
+      responseType = PotField.PredictionResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<Grpc.PredictRequest,
-      Grpc.PredictionResponse> getPredictMethod() {
-    io.grpc.MethodDescriptor<Grpc.PredictRequest, Grpc.PredictionResponse> getPredictMethod;
+  public static io.grpc.MethodDescriptor<PotField.PredictRequest,
+      PotField.PredictionResponse> getPredictMethod() {
+    io.grpc.MethodDescriptor<PotField.PredictRequest, PotField.PredictionResponse> getPredictMethod;
     if ((getPredictMethod = PredictionServiceGrpc.getPredictMethod) == null) {
       synchronized (PredictionServiceGrpc.class) {
         if ((getPredictMethod = PredictionServiceGrpc.getPredictMethod) == null) {
           PredictionServiceGrpc.getPredictMethod = getPredictMethod = 
-              io.grpc.MethodDescriptor.<Grpc.PredictRequest, Grpc.PredictionResponse>newBuilder()
+              io.grpc.MethodDescriptor.<PotField.PredictRequest, PotField.PredictionResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "PredictionService", "predict"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  Grpc.PredictRequest.getDefaultInstance()))
+                  PotField.PredictRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  Grpc.PredictionResponse.getDefaultInstance()))
+                  PotField.PredictionResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new PredictionServiceMethodDescriptorSupplier("predict"))
                   .build();
           }
@@ -120,15 +118,15 @@ public final class PredictionServiceGrpc {
 
     /**
      */
-    public void fit(Grpc.FitRequest request,
-        io.grpc.stub.StreamObserver<Grpc.FitResponse> responseObserver) {
+    public void fit(PotField.FitRequest request,
+        io.grpc.stub.StreamObserver<PotField.FitResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getFitMethod(), responseObserver);
     }
 
     /**
      */
-    public void predict(Grpc.PredictRequest request,
-        io.grpc.stub.StreamObserver<Grpc.PredictionResponse> responseObserver) {
+    public void predict(PotField.PredictRequest request,
+        io.grpc.stub.StreamObserver<PotField.PredictionResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getPredictMethod(), responseObserver);
     }
 
@@ -138,15 +136,15 @@ public final class PredictionServiceGrpc {
             getFitMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                Grpc.FitRequest,
-                Grpc.FitResponse>(
+                PotField.FitRequest,
+                PotField.FitResponse>(
                   this, METHODID_FIT)))
           .addMethod(
             getPredictMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                Grpc.PredictRequest,
-                Grpc.PredictionResponse>(
+                PotField.PredictRequest,
+                PotField.PredictionResponse>(
                   this, METHODID_PREDICT)))
           .build();
     }
@@ -172,16 +170,16 @@ public final class PredictionServiceGrpc {
 
     /**
      */
-    public void fit(Grpc.FitRequest request,
-        io.grpc.stub.StreamObserver<Grpc.FitResponse> responseObserver) {
+    public void fit(PotField.FitRequest request,
+        io.grpc.stub.StreamObserver<PotField.FitResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getFitMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void predict(Grpc.PredictRequest request,
-        io.grpc.stub.StreamObserver<Grpc.PredictionResponse> responseObserver) {
+    public void predict(PotField.PredictRequest request,
+        io.grpc.stub.StreamObserver<PotField.PredictionResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getPredictMethod(), getCallOptions()), request, responseObserver);
     }
@@ -207,14 +205,14 @@ public final class PredictionServiceGrpc {
 
     /**
      */
-    public Grpc.FitResponse fit(Grpc.FitRequest request) {
+    public PotField.FitResponse fit(PotField.FitRequest request) {
       return blockingUnaryCall(
           getChannel(), getFitMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public Grpc.PredictionResponse predict(Grpc.PredictRequest request) {
+    public PotField.PredictionResponse predict(PotField.PredictRequest request) {
       return blockingUnaryCall(
           getChannel(), getPredictMethod(), getCallOptions(), request);
     }
@@ -240,16 +238,16 @@ public final class PredictionServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Grpc.FitResponse> fit(
-        Grpc.FitRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<PotField.FitResponse> fit(
+        PotField.FitRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getFitMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Grpc.PredictionResponse> predict(
-        Grpc.PredictRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<PotField.PredictionResponse> predict(
+        PotField.PredictRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getPredictMethod(), getCallOptions()), request);
     }
@@ -276,12 +274,12 @@ public final class PredictionServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_FIT:
-          serviceImpl.fit((Grpc.FitRequest) request,
-              (io.grpc.stub.StreamObserver<Grpc.FitResponse>) responseObserver);
+          serviceImpl.fit((PotField.FitRequest) request,
+              (io.grpc.stub.StreamObserver<PotField.FitResponse>) responseObserver);
           break;
         case METHODID_PREDICT:
-          serviceImpl.predict((Grpc.PredictRequest) request,
-              (io.grpc.stub.StreamObserver<Grpc.PredictionResponse>) responseObserver);
+          serviceImpl.predict((PotField.PredictRequest) request,
+              (io.grpc.stub.StreamObserver<PotField.PredictionResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -305,7 +303,7 @@ public final class PredictionServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return Grpc.getDescriptor();
+      return PotField.getDescriptor();
     }
 
     @java.lang.Override

@@ -47,7 +47,7 @@
         <dependency>
             <groupId>com.opencsv</groupId>
             <artifactId>opencsv</artifactId>
-            <version>5.9</version>
+            <version>5.5</version>
         </dependency>
     </dependencies>
 
@@ -57,6 +57,8 @@
 
     <build>
         <defaultGoal>clean generate-sources compile install</defaultGoal>
+        <sourceDirectory>src/java/main</sourceDirectory>
+        <!-- <testSourceDirectory>test</testSourceDirectory> -->
 
         <plugins>
             <!-- compile proto file into java files. -->
@@ -80,12 +82,12 @@
                             <outputTargets>
                                 <outputTarget>
                                     <type>java</type>
-                                    <outputDirectory>src/java/main/grpc_generated</outputDirectory>
+                                    <outputDirectory>src/java/main</outputDirectory>
                                 </outputTarget>
                                 <outputTarget>
                                     <type>grpc_generated-java</type>
                                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.15.0</pluginArtifact>
-                                    <outputDirectory>src/java/main/grpc_generated</outputDirectory>
+                                    <outputDirectory>src/java/main</outputDirectory>
                                 </outputTarget>
                             </outputTargets>
                         </configuration>
@@ -103,6 +105,20 @@
                     <target>9</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                <archive>
+                    <manifest>
+                    <addClasspath>true</addClasspath>
+                    <mainClass>Main</mainClass>
+                    </manifest>
+                </archive>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
