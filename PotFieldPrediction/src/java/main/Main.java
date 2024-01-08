@@ -1,6 +1,9 @@
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
+import edu.hm.teamLoewen.PotField;
+import edu.hm.teamLoewen.PredictionService;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.File;

@@ -1,3 +1,4 @@
+package edu.hm.teamLoewen;
 /**
  * Exception raised if the prediction service could not be started.
  */
