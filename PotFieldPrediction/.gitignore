@@ -33,6 +33,6 @@ bin/
 *.so
 *.exe
 build/
-target/
+**target/
 # ignore compiled c file from Cython
 src/python/*.c
