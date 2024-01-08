@@ -1,2 +1,11 @@
-C:\Users\tarek\Desktop\7th_Semester\ProjektStudiumDC\dscTeamLoewen\PotFieldPrediction\src\java\main\grpc_generated\Grpc.java
-C:\Users\tarek\Desktop\7th_Semester\ProjektStudiumDC\dscTeamLoewen\PotFieldPrediction\src\java\main\grpc_generated\PredictionServiceGrpc.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/PredictionService.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/mock/FieldSequence.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/mock/CoordinateI.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/Main.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/mock/FieldI.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/PredictionServiceGrpc.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/PotField.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/mock/Coordinate.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/mock/Field.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/mock/FieldSequenceI.java
+/home/nicklas/Uni/dscTeamLoewen/PotFieldPrediction/src/java/main/ServiceNotRunningException.java
