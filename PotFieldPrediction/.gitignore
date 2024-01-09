@@ -2,11 +2,7 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-<<<<<<< HEAD
 **/.idea
-=======
-.idea/
->>>>>>> 7-add-ipc-to-python-and-java-script
 
 ### Eclipse ###
 .apt_generated
@@ -37,6 +33,6 @@ bin/
 *.so
 *.exe
 build/
-target/
+**target/
 # ignore compiled c file from Cython
 src/python/*.c
