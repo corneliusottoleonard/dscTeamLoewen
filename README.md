@@ -19,6 +19,14 @@ to build the package. To make it installable locally, you can execute
 
 This will store the built JAR in your local Maven repository.
 
+## Cloning Vadere
+Vadere is stored in a git submodule. To clone its content, after cloning the regular repository, simply run
+```bash
+git submodule update --init --force --recursive --remote
+```
+
+Afterwards, you can `cd` into the directory as usually.
+
 ## Running Vadere
 
 For starting Vadere nothing has changed. The only prerequisite is that the `PotFieldPrediction` is available on the local Maven repository. If thats given, vadere can be built using `mvn clean -Dmaven.test.skip=true install` and started using `java -jar VadereGui/target/vadere-gui.jar`.
